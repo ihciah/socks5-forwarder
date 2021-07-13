@@ -1,0 +1,13 @@
+version: '2.4'
+services:
+  socks5-forwarder:
+    image: ihciah/socks5-forwarder:latest
+    container_name: socks5-forwarder
+    restart: always
+    network_mode: "host"
+    environment:
+      - LISTEN=127.0.0.1:8000
+      - TARGET=1.1.1.1:10000
+      - PROXY=10.0.0.1:8080
+      - USERNAME=
+      - PASSWORD=
