@@ -38,19 +38,19 @@ async fn main() {
         )
         .arg(
             Arg::with_name("proxy-addr")
-                .long("proxy")
+                .long("proxy-addr")
                 .takes_value(true)
                 .help("socks5 proxy address, like 10.0.0.1:8080"),
         )
         .arg(
             Arg::with_name("proxy-username")
-                .long("user")
+                .long("proxy-user")
                 .takes_value(true)
                 .help("socks5 proxy username, can be left blank"),
         )
         .arg(
             Arg::with_name("proxy-password")
-                .long("pass")
+                .long("proxy-pass")
                 .takes_value(true)
                 .help("socks5 proxy password, can be left blank"),
         )

@@ -9,10 +9,9 @@ members = [
 lto = true
 opt-level = 3
 
-# TODO: replace back to official version once the PR is merged and published
 [patch.crates-io]
-bpf-sys = {git = "https://github.com/ihciah/redbpf", branch = "main"}
-cargo-bpf = {git = "https://github.com/ihciah/redbpf", branch = "main"}
-redbpf = {git = "https://github.com/ihciah/redbpf", branch = "main"}
-redbpf-macros = {git = "https://github.com/ihciah/redbpf", branch = "main"}
-redbpf-probes = {git = "https://github.com/ihciah/redbpf", branch = "main"}
+bpf-sys = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
+cargo-bpf = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
+redbpf = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
+redbpf-macros = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
+redbpf-probes = {git = "https://github.com/ihciah/redbpf", branch = "custom"}

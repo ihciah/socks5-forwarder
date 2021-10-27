@@ -14,17 +14,17 @@ fi
 
 if [ ! -z "$PROXY" ]
 then
-      parameter="$parameter --proxy $PROXY"
+      parameter="$parameter --proxy-addr $PROXY"
 fi
 
 if [ ! -z "$USERNAME" ]
 then
-      parameter="$parameter --user $USERNAME"
+      parameter="$parameter --proxy-user $USERNAME"
 fi
 
 if [ ! -z "$PASSWORD" ]
 then
-      parameter="$parameter --pass $PASSWORD"
+      parameter="$parameter --proxy-pass $PASSWORD"
 fi
 
 socks5-forwarder $parameter

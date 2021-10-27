@@ -92,7 +92,7 @@ dependencies = [
 [[package]]
 name = "bpf-sys"
 version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=main#2db1bd95a5ea958d6812b5b48c0205f590816eac"
+source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
 dependencies = [
  "bindgen",
  "cc",
@@ -117,7 +117,7 @@ checksum = "c4872d67bab6358e59559027aa3b9157c53d9358c51423c17554809a8858e0f8"
 [[package]]
 name = "cargo-bpf"
 version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=main#2db1bd95a5ea958d6812b5b48c0205f590816eac"
+source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
 dependencies = [
  "anyhow",
  "bindgen",
@@ -750,7 +750,7 @@ dependencies = [
 [[package]]
 name = "redbpf"
 version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=main#2db1bd95a5ea958d6812b5b48c0205f590816eac"
+source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
 dependencies = [
  "bindgen",
  "bpf-sys",
@@ -768,7 +768,7 @@ dependencies = [
 [[package]]
 name = "redbpf-macros"
 version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=main#2db1bd95a5ea958d6812b5b48c0205f590816eac"
+source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -780,7 +780,7 @@ dependencies = [
 [[package]]
 name = "redbpf-probes"
 version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=main#2db1bd95a5ea958d6812b5b48c0205f590816eac"
+source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
 dependencies = [
  "anyhow",
  "bindgen",

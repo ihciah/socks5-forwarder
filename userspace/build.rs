@@ -8,8 +8,14 @@ fn main() {
     let target = PathBuf::from(env::var("OUT_DIR").unwrap());
     let probes = Path::new("../probe");
 
-    cargo_bpf::build(&cargo, probes, &target.join("target"), Vec::new())
-        .expect("couldn't compile probes");
+    cargo_bpf::build(
+        &cargo,
+        probes,
+        &target.join("target"),
+        Vec::new(),
+        Some((5, 4)),
+    )
+    .expect("couldn't compile probes");
 
     cargo_bpf::probe_files(probes)
         .expect("couldn't list probe files")
