@@ -1,0 +1,37 @@
+[package]
+name = "socks5-forwarder-userspace"
+version = "0.1.0"
+authors = ["ihciah <ihciah@gmail.com>"]
+edition = "2018"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/ihciah/socks5-forwarder"
+description = "Socks5 forwarder"
+keywords = ["socks5", "forward", "tunnel", "proxy"]
+
+[dependencies]
+probe = { path = "../probe" }
+libc = "0.2"
+futures = "0.3"
+
+slab = "0.4"
+clap = "3.0.0-beta.5"
+anyhow = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.2"
+tokio-socks = "0.5"
+tokio-stream = { version = "0.1", features = ["net"] }
+tokio = { version = "^1.0.1", features = ["rt", "rt-multi-thread", "signal", "io-util", "net", "sync"] }
+redbpf = { version = "2.0.2", features = ["load"] }
+
+[build-dependencies]
+cargo-bpf = { version = "2.0.2", default-features = false, features = ["build"] }
+
+[[bin]]
+name = "userspace"
+path = "src/main.rs"
+
+[features]
+kernel5_8 = []
+default = ["cargo-bpf/llvm12"]
+llvm11 = ["cargo-bpf/llvm11"]

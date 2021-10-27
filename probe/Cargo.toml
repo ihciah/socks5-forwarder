@@ -1,0 +1,31 @@
+[package]
+authors = ["ihciah <ihciah@gmail.com>"]
+description = "Socks5 forwarder"
+edition = "2018"
+keywords = ["socks5", "forward", "tunnel", "proxy"]
+license = "MIT"
+name = "probe"
+readme = "README.md"
+repository = "https://github.com/ihciah/socks5-forwarder"
+version = "0.1.0"
+
+[dependencies]
+cty = "0.2"
+memoffset = "0.6.4"
+redbpf-macros = "2.0.2"
+redbpf-probes = "2.0.2"
+
+[build-dependencies]
+cargo-bpf = { version = "2.0.2", default-features = false }
+
+[features]
+default = []
+probes = []
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "probes"
+path = "src/main.rs"
+required-features = ["probes"]

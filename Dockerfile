@@ -2,10 +2,9 @@ FROM rust:1.53-alpine as builder
 WORKDIR /usr/src/socks5-forwarder
 RUN apk add --no-cache musl-dev libressl-dev
 COPY . .
-RUN RUSTFLAGS="" cargo build --release
+RUN RUSTFLAGS="" cargo build --bin socks5-forwarder --release
 
 FROM alpine:latest
-MAINTAINER ihciah <ihciah@gmail.com>
 
 ENV LISTEN=""
 ENV TARGET=""

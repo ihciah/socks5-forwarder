@@ -2,17 +2,20 @@ use std::fmt::Debug;
 use std::sync::Arc;
 
 use clap::{App, Arg};
-use tokio::io;
-use tokio::io::AsyncWriteExt;
 use tokio::net::{TcpListener, TcpStream, ToSocketAddrs};
 use tokio_socks::tcp::Socks5Stream;
 use tokio_socks::IntoTargetAddr;
 use tokio_stream::wrappers::TcpListenerStream;
 use tokio_stream::StreamExt;
+use tracing::Level;
+use tracing_subscriber::FmtSubscriber;
 
 #[tokio::main]
 async fn main() {
-    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    let subscriber = FmtSubscriber::builder()
+        .with_max_level(Level::INFO)
+        .finish();
+    tracing::subscriber::set_global_default(subscriber).unwrap();
 
     let matches = App::new("Socks5 Forwarder")
         .version(clap::crate_version!())
@@ -82,24 +85,24 @@ where
     L: ToSocketAddrs + Debug + 'static,
     T: IntoTargetAddr<'static> + Clone + Send + 'static,
 {
-    log::info!("Listening at {:?}", listen_addr);
+    tracing::info!("Listening at {:?}", listen_addr);
     let mut listener_stream = TcpListenerStream::new(TcpListener::bind(listen_addr).await?);
     let proxy = Arc::new(proxy);
 
     loop {
         match listener_stream.try_next().await {
             Ok(Some(conn)) => {
-                log::info!("Receive new incoming connection");
+                tracing::info!("Receive new incoming connection");
                 let target_addr = target_addr.clone();
                 let proxy = proxy.clone();
                 tokio::spawn(async move { relay(conn, target_addr, proxy).await });
             }
             Ok(None) => {
-                log::info!("Listener closed");
+                tracing::info!("Listener closed");
                 return Ok(());
             }
             Err(e) => {
-                log::error!("Receiving incoming connection in failure: {}", e);
+                tracing::error!("Receiving incoming connection in failure: {}", e);
             }
         }
     }
@@ -127,22 +130,9 @@ where
         }
     };
 
-    let (mut ri, mut wi) = inbound.split();
-    let (mut ro, mut wo) = outbound.split();
+    tracing::info!("Start relay");
+    tokio::io::copy_bidirectional(&mut inbound, &mut outbound).await?;
 
-    let client_to_server = async {
-        io::copy(&mut ri, &mut wo).await?;
-        wo.shutdown().await
-    };
-
-    let server_to_client = async {
-        io::copy(&mut ro, &mut wi).await?;
-        wi.shutdown().await
-    };
-
-    log::info!("Start relay");
-    tokio::try_join!(client_to_server, server_to_client)?;
-
-    log::info!("Relay finished");
+    tracing::info!("Relay finished");
     Ok(())
 }
