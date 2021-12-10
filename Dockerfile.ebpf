@@ -1,45 +1,6 @@
-FROM alpine:edge as builder
+# I failed to build it inside the docker.
+# So build local first: cargo build --bin userspace --release --target=x86_64-unknown-linux-musl
 
-# Install rust
-RUN apk add ca-certificates gcc
-
-ENV RUSTUP_HOME=/usr/local/rustup \
-    CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=1.56.0
-
-RUN set -eux; \
-    apkArch="$(apk --print-arch)"; \
-    case "$apkArch" in \
-        x86_64) rustArch='x86_64-unknown-linux-musl'; rustupSha256='bdf022eb7cba403d0285bb62cbc47211f610caec24589a72af70e1e900663be9' ;; \
-        aarch64) rustArch='aarch64-unknown-linux-musl'; rustupSha256='89ce657fe41e83186f5a6cdca4e0fd40edab4fd41b0f9161ac6241d49fbdbbbe' ;; \
-        *) echo >&2 "unsupported architecture: $apkArch"; exit 1 ;; \
-    esac; \
-    url="https://static.rust-lang.org/rustup/archive/1.24.3/${rustArch}/rustup-init"; \
-    wget "$url"; \
-    echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
-    chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path --profile minimal --default-toolchain $RUST_VERSION --default-host ${rustArch}; \
-    rm rustup-init; \
-    chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
-    rustup --version; \
-    cargo --version; \
-    rustc --version;
-
-# Install pakcages
-RUN apk add --no-cache musl-dev curl wget linux-headers make \
-    perl makedepend grep coreutils binutils linux-lts-dev linux-lts \
-    libxml2-dev gcc libc-dev clang-libs llvm12 llvm12-libs llvm12-dev \
-    llvm12-static g++ openssl openssl-dev openssl-libs-static
-RUN rustup target add x86_64-unknown-linux-musl
-RUN cargo install bindgen
-
-# Compile
-WORKDIR /usr/src/socks5-forwarder
-COPY . .
-RUN RUSTFLAGS="" cargo build --bin userspace --release
-
-# Copy binary to another image
 FROM alpine:latest
 
 ENV LISTEN=""
@@ -49,6 +10,6 @@ ENV USERNAME=""
 ENV PASSWORD=""
 
 COPY ./entrypoint.sh /
+COPY ./target/x86_64-unknown-linux-musl/release/userspace /usr/local/bin/socks5-forwarder
 RUN chmod +x /entrypoint.sh && apk add --no-cache ca-certificates
-COPY --from=builder /usr/src/socks5-forwarder/target/release/userspace /usr/local/bin/socks5-forwarder
 ENTRYPOINT ["/entrypoint.sh"]

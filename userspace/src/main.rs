@@ -18,19 +18,19 @@ struct Opts {
         short,
         long,
         default_value = "127.0.0.1:8000",
-        about = "listen address"
+        help = "listen address"
     )]
     listen: String,
-    #[clap(short, long, about = "target address, like 1.1.1.1:443")]
+    #[clap(short, long, help = "target address, like 1.1.1.1:443")]
     target: String,
     #[clap(
         long,
-        about = "socks5 proxy address, like 10.0.0.1:8080(leave blank for direct proxy)"
+        help = "socks5 proxy address, like 10.0.0.1:8080(leave blank for direct proxy)"
     )]
     proxy_addr: Option<String>,
-    #[clap(long, about = "socks5 proxy username")]
+    #[clap(long, help = "socks5 proxy username")]
     proxy_user: Option<String>,
-    #[clap(long, about = "socks5 proxy password")]
+    #[clap(long, help = "socks5 proxy password")]
     proxy_pass: Option<String>,
 }
 
