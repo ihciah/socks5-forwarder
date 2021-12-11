@@ -1,0 +1,16 @@
+# I failed to build it inside the docker.
+# So build local first: cargo build --bin userspace --release
+
+FROM debian:bullseye-slim
+
+ENV LISTEN=""
+ENV TARGET=""
+ENV PROXY=""
+ENV USERNAME=""
+ENV PASSWORD=""
+
+COPY ./entrypoint.sh /
+COPY ./target/release/userspace /usr/local/bin/socks5-forwarder
+RUN chmod +x /entrypoint.sh && apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates curl libc6 libelf-dev && rm -rf /var/lib/apt/lists/*
+ENTRYPOINT ["/entrypoint.sh"]

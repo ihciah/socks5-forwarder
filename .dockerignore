@@ -1,3 +1,4 @@
 /target/
 /.git/
 !/target/x86_64-unknown-linux-musl/release/userspace
+!/target/release/userspace
