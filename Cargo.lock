@@ -71,8 +71,7 @@ checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 [[package]]
 name = "bpf-sys"
 version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59a9793064739d5b20f42956ccfaf89244e9d73b9732ddb1062d2932bd61f21b"
+source = "git+https://github.com/ihciah/redbpf?branch=fix-aarch64#d31da930ffac5693eae53ec6c8c461b3dce6bb10"
 dependencies = [
  "bindgen",
  "cc",
@@ -97,8 +96,7 @@ checksum = "c4872d67bab6358e59559027aa3b9157c53d9358c51423c17554809a8858e0f8"
 [[package]]
 name = "cargo-bpf"
 version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "43903c9072a3c58821eccb886da4a3677c5f3d76e250302878f6b33b81d290d0"
+source = "git+https://github.com/ihciah/redbpf?branch=fix-aarch64#d31da930ffac5693eae53ec6c8c461b3dce6bb10"
 dependencies = [
  "anyhow",
  "bindgen",
@@ -111,6 +109,7 @@ dependencies = [
  "llvm-sys 120.2.1",
  "proc-macro2",
  "quote",
+ "redbpf",
  "rustversion",
  "syn",
  "tempfile",
@@ -164,9 +163,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "3.0.0-rc.3"
+version = "3.0.0-rc.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "098d281b47bf725a0bddd829e0070ee76560faab8af123050a86c440d7f0a1fd"
+checksum = "967965e82fc46fee1a88147a7a977a66d615ed5f83eb95b18577b342c08f90ff"
 dependencies = [
  "atty",
  "bitflags",
@@ -181,9 +180,9 @@ dependencies = [
 
 [[package]]
 name = "clap_derive"
-version = "3.0.0-rc.3"
+version = "3.0.0-rc.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26de8102ffb96701066cea36f9a104285b67fbcc302a520640289d476c15ed8a"
+checksum = "85946d4034625800196413478a1c6d3a57c12785e1f3970e590e0137dfa07342"
 dependencies = [
  "heck",
  "proc-macro-error",
@@ -385,9 +384,9 @@ checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
 
 [[package]]
 name = "libc"
-version = "0.2.110"
+version = "0.2.109"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b58a4469763e4e3a906c4ed786e1c70512d16aa88f84dded826da42640fc6a1c"
+checksum = "f98a04dce437184842841303488f70d0188c5f51437d2a834dc097eafa909a01"
 
 [[package]]
 name = "libloading"
@@ -697,8 +696,7 @@ dependencies = [
 [[package]]
 name = "redbpf"
 version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b919b23157c41971716f94f9d0786f14f5e54f675b6aa1103ab22652fd733bb3"
+source = "git+https://github.com/ihciah/redbpf?branch=fix-aarch64#d31da930ffac5693eae53ec6c8c461b3dce6bb10"
 dependencies = [
  "bindgen",
  "bpf-sys",
@@ -716,8 +714,7 @@ dependencies = [
 [[package]]
 name = "redbpf-macros"
 version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b2e1ff4ad997babb0eb64f0b8bb2c078a6ca02a2dd760eda391763a695b2cde7"
+source = "git+https://github.com/ihciah/redbpf?branch=fix-aarch64#d31da930ffac5693eae53ec6c8c461b3dce6bb10"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -729,8 +726,7 @@ dependencies = [
 [[package]]
 name = "redbpf-probes"
 version = "2.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "79a0c7ca7fe034d741b44ee1253b088955e31e5c649a35e40dfac28b72eec529"
+source = "git+https://github.com/ihciah/redbpf?branch=fix-aarch64#d31da930ffac5693eae53ec6c8c461b3dce6bb10"
 dependencies = [
  "anyhow",
  "bindgen",
@@ -813,9 +809,9 @@ checksum = "f2cc38e8fa666e2de3c4aba7edeb5ffc5246c1c2ed0e3d17e560aeeba736b23f"
 
 [[package]]
 name = "ryu"
-version = "1.0.6"
+version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c9613b5a66ab9ba26415184cfc41156594925a9cf3a2057e57f31ff145f6568"
+checksum = "254df5081ce98661a883445175e52efe99d1cb2a5552891d965d2f5d0cad1c16"
 
 [[package]]
 name = "scroll"
