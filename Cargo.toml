@@ -8,10 +8,3 @@ members = [
 [profile.release]
 lto = true
 opt-level = 3
-
-[patch.crates-io]
-bpf-sys = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
-cargo-bpf = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
-redbpf = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
-redbpf-macros = {git = "https://github.com/ihciah/redbpf", branch = "custom"}
-redbpf-probes = {git = "https://github.com/ihciah/redbpf", branch = "custom"}

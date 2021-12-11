@@ -41,7 +41,7 @@ where
 
     fn add(&mut self, fd: RawFd, key: Self::K) -> Result<(), Error> {
         let idx = self.idx_slab.insert(()) as u32;
-        self.idx_map.set(key, idx)?;
+        self.idx_map.set(key, idx);
         self.sockmap.set(idx, fd)
     }
 

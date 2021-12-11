@@ -70,8 +70,9 @@ checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
 name = "bpf-sys"
-version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "59a9793064739d5b20f42956ccfaf89244e9d73b9732ddb1062d2932bd61f21b"
 dependencies = [
  "bindgen",
  "cc",
@@ -95,8 +96,9 @@ checksum = "c4872d67bab6358e59559027aa3b9157c53d9358c51423c17554809a8858e0f8"
 
 [[package]]
 name = "cargo-bpf"
-version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43903c9072a3c58821eccb886da4a3677c5f3d76e250302878f6b33b81d290d0"
 dependencies = [
  "anyhow",
  "bindgen",
@@ -694,8 +696,9 @@ dependencies = [
 
 [[package]]
 name = "redbpf"
-version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b919b23157c41971716f94f9d0786f14f5e54f675b6aa1103ab22652fd733bb3"
 dependencies = [
  "bindgen",
  "bpf-sys",
@@ -712,8 +715,9 @@ dependencies = [
 
 [[package]]
 name = "redbpf-macros"
-version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b2e1ff4ad997babb0eb64f0b8bb2c078a6ca02a2dd760eda391763a695b2cde7"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -724,8 +728,9 @@ dependencies = [
 
 [[package]]
 name = "redbpf-probes"
-version = "2.0.2"
-source = "git+https://github.com/ihciah/redbpf?branch=custom#9d227c24ce5fee8b202755a53a44430561239526"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "79a0c7ca7fe034d741b44ee1253b088955e31e5c649a35e40dfac28b72eec529"
 dependencies = [
  "anyhow",
  "bindgen",
