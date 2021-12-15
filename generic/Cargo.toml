@@ -12,11 +12,17 @@ keywords = ["socks5", "forward", "tunnel", "proxy"]
 [dependencies]
 tokio-socks = "0.5"
 tokio-stream = { version = "0.1", features = ["net"] }
-tokio = { version = "1.0", features = ["net", "rt", "rt-multi-thread", "macros"] }
+tokio = { version = "1.0", features = [
+    "net",
+    "rt",
+    "rt-multi-thread",
+    "macros",
+] }
 anyhow = "1.0"
 tracing = "0.1"
 tracing-subscriber = "0.3"
-clap = {version = "3.0.0-rc.3", features = ["default", "derive"]}
+clap = { version = "3.0.0-rc.3", features = ["default", "derive"] }
+socket2 = "0.4"
 
 [[bin]]
 name = "socks5-forwarder"
