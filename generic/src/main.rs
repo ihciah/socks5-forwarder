@@ -115,7 +115,11 @@ where
                 set_tcp_keepalive(&conn, Some(DEFAULT_KEEPALIVE_TIMEOUT))?;
                 tracing::info!("Receive new incoming connection");
                 let target_addr = target_addr.clone();
-                tokio::spawn(async move { relay(conn, target_addr).await });
+                tokio::spawn(async move {
+                    if let Err(e) = relay(conn, target_addr).await {
+                        tracing::error!("Relay failed: {}", e);
+                    }
+                });
             }
             Ok(None) => {
                 tracing::info!("Listener closed");
@@ -182,7 +186,20 @@ fn set_tcp_keepalive(
     use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
     let socket = unsafe { socket2::Socket::from_raw_fd(stream.as_raw_fd()) };
     let res = keepalive_duration
-        .map(|duration| socket2::TcpKeepalive::new().with_time(duration))
+        .map(|duration| {
+            let mut keepalive = socket2::TcpKeepalive::new().with_time(duration);
+            #[cfg(any(
+                target_os = "freebsd",
+                target_os = "fuchsia",
+                target_os = "linux",
+                target_os = "netbsd",
+                target_vendor = "apple",
+            ))]
+            {
+                keepalive = keepalive.with_interval(duration);
+            }
+            keepalive
+        })
         .map(|ref keepalive| socket.set_tcp_keepalive(keepalive))
         .transpose()
         .map(|_| ())
