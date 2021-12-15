@@ -181,10 +181,12 @@ fn set_tcp_keepalive(
 ) -> anyhow::Result<()> {
     use std::os::unix::io::{AsRawFd, FromRawFd, IntoRawFd};
     let socket = unsafe { socket2::Socket::from_raw_fd(stream.as_raw_fd()) };
-    keepalive_duration
+    let res = keepalive_duration
         .map(|duration| socket2::TcpKeepalive::new().with_time(duration))
         .map(|ref keepalive| socket.set_tcp_keepalive(keepalive))
-        .transpose()?;
+        .transpose()
+        .map(|_| ())
+        .map_err(|e| e.into());
     let _ = socket.into_raw_fd();
-    Ok(())
+    res
 }
